@@ -32,7 +32,7 @@
                     @endif
                 </td>
                 <td>{{ $listCate[$item->category_id] }}</td>
-                <td>{{ $item->status ? 'Active' : 'Inactive' }}</td>
+                <td>{{ $item->status ? 'còn hàng' : 'hết hàng' }}</td>
                 <td>
                     <button class="btn btn-primary">sửa</button>
                     <button class="btn btn-danger">xóa</button>
