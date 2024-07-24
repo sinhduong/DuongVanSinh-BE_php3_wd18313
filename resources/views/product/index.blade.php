@@ -1,42 +1,45 @@
 @extends('layoutadmin')
-@section('title')
-    Danh sách sản phẩm
-@endsection
-@section('content')
 
+@section('title', 'Danh sách sản phẩm')
+
+@section('content')
+<a class="btn btn-primary" href="{{ route('products.create') }}">Thêm mới</a>
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">id</th>
-            <th scope="col">name</th>
-            <th scope="col">price</th>
-            <th scope="col">quantity</th>
-            <th scope="col">image</th>
-            <th scope="col">category name</th>
-            <th scope="col">status</th>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Image</th>
+            <th scope="col">Category Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Thao tác</th>
         </tr>
         </thead>
         <tbody>
         @foreach($listPro as $item)
-        <tr>
-            <th scope="row">{{$item->id}}</th>
-            <td>{{$item->name}}</td>
-            <td>{{$item->price}}</td>
-            <td>{{$item->quantity}}</td>
-            <td>
-                @if(!isset($item->image))
-                    Không có hình ảnh
-                @else
-                    {{$item->image}}
-                @endif
-            </td>
-{{--            <td>{{$item->loadAllCategory->name}}</td>--}}
-{{--                <td>{{$item->catename}}</td>--}}
-            <td>{{$listCate[$item->category_id]}}</td>
-            <td>{{$item->status}}</td>
-        </tr>
+            <tr>
+                <th scope="row">{{ $item->id }}</th>
+                <td>{{ $item->name }}</td>
+                <td>{{ $item->price }}</td>
+                <td>{{ $item->quantity }}</td>
+                <td>
+                    @if(!$item->image)
+                        Không có hình ảnh
+                    @else
+                        <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" width="100">
+                    @endif
+                </td>
+                <td>{{ $listCate[$item->category_id] }}</td>
+                <td>{{ $item->status ? 'Active' : 'Inactive' }}</td>
+                <td>
+                    <button class="btn btn-primary">sửa</button>
+                    <button class="btn btn-danger">xóa</button>
+                </td>
+            </tr>
         @endforeach
         </tbody>
     </table>
-    {{$listPro->links()}}
+    {{ $listPro->links() }}
 @endsection
